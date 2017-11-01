@@ -30,7 +30,7 @@
                               v-loading="loading"
                               element-loading-text="拼命加载中..."
                               style="width: 100%"
-                              height="443"
+                              height="400"
                               @sort-change="tableSortChange"
                               @selection-change="tableSelectionChange">
                         <el-table-column type="selection"
@@ -65,7 +65,7 @@
                     <!--分页begin-->
                     <el-pagination class="tc mg"
                                    :current-page="filter.page"
-                                   :page-sizes="[10, 20, 50, 100]"
+                                   :page-sizes="[2, 10, 20, 50, 100]"
                                    :page-size="filter.per_page"
                                    layout="total, sizes, prev, pager, next, jumper"
                                    :total="total_rows"
@@ -287,21 +287,20 @@ export default {
           this.getUsers();
       },
       // 获取用户列表
-      getUsers() {
+      getUsers() { 
           this.loading = true;
           var resource = this.$resource(this.url);
           resource.query(this.filter).then((response) => {
-          		
               this.users = response.data.content;
-              this.total_rows = response.data.number;
+              this.total_rows = response.data.totalElements;
+              this.filter.per_page = response.data.size;
+              this.filter.page = resposne.data.number;
               this.loading = false;
               this.selected.splice(0,this.selected.length);
-          })
-          .catch((response)=> {
-                  this.$message.error('错了哦，这是一条错误消息');
+          }).catch((response)=> {
+              this.$message.error('错了哦，这是一条错误消息');
               this.loading = false;
           });
-
       },
 
       // 创建用户
