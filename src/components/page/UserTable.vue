@@ -105,6 +105,8 @@
             <el-button type="primary" :loading="createLoading" @click="createUser">确 定</el-button>
         </div>
     </el-dialog>
+    
+    
     <!-- 修改用户 begin-->
     <el-dialog title="修改用户信息" v-model="dialogUpdateVisible"  :close-on-click-modal="false" :close-on-press-escape="false">
         <el-form id="#update" :model="update" :rules="updateRules" ref="update" label-width="100px">
@@ -289,7 +291,7 @@ export default {
       // 获取用户列表
       getUsers() { 
           this.loading = true;
-          var resource = this.$resource(this.url);
+          var resource = this.$resource(this.url);          
           resource.query(this.filter).then((response) => {
               this.users = response.data.content;
               this.total_rows = response.data.totalElements;

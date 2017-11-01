@@ -30,6 +30,10 @@ export default new Router({
                 	component: resolve => require(['../components/page/UserTable.vue'], resolve)
                 },
                 {
+                	path: '/datepicker',
+                	component: resolve => require(['../components/page/DatePicker.vue'], resolve)
+                },
+                {
                     path: '/vuetable',
                     component: resolve => require(['../components/page/VueTable.vue'], resolve)     // vue-datasource组件
                 }

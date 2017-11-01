@@ -47,6 +47,10 @@
                                 title: '用户列表'
                             },
                             {
+                                index: 'datepicker',
+                                title: 'datepicker'
+                            },
+                            {
                                 index: 'vuetable',
                                 title: 'Vue表格组件'
                             }
