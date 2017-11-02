@@ -53,9 +53,29 @@
                             {
                                 index: 'vuetable',
                                 title: 'Vue表格组件'
+                            },
+                            {
+                                index: 'studenttable',
+                                title: '学生信息表'
                             }
                         ]
-                    }
+                    },
+                    {
+                        icon: 'el-icon-date',
+                        index: '3',
+                        title: '测试ElementUI',
+                        subs: [
+                        	{
+                                index: 'baseform',
+                                title: '基本表单'
+                            },
+                            {
+                                index: 'ui-test1',
+                                title: 'test1'
+                            }
+                        ]
+                    },
+                    
                 ]
             }
         },

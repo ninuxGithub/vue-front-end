@@ -36,6 +36,18 @@ export default new Router({
                 {
                     path: '/vuetable',
                     component: resolve => require(['../components/page/VueTable.vue'], resolve)     // vue-datasource组件
+                },
+                {
+                	path: '/ui-test1',
+                	component: resolve => require(['../components/page/Ui-Test1.vue'], resolve)
+                },
+                {
+                	path: '/studenttable',
+                	component: resolve => require(['../components/page/StudentTable.vue'], resolve)
+                },
+                {
+                    path: '/baseform',
+                    component: resolve => require(['../components/page/BaseForm.vue'], resolve)
                 }
             ]
         },

@@ -8,7 +8,7 @@
         </div>
 		 <div class="handle-box">
 		    <el-form :inline="true" :model="formInline">
-		        <el-form-item label="Sex">
+		        <el-form-item label="Sex" class="bg-purple-dark">
 		            <el-select v-model="formInline.sex" clearable placeholder="select sex"
 		                       v-on:visible-change="selectDemo">
 		                <el-option
