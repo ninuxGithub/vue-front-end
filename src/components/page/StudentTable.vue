@@ -28,9 +28,9 @@
    						@sort-change="tableSortChange" 
    						@selection-change ="tableSelectionChange">
    						<el-table-column type="selection" width="100"></el-table-column>
-   						<el-table-column sortable="name" prop="name" label="姓名" width="240"></el-table-column>
-   						<el-table-column sortable="number" prop="number" label="学号" width="240"></el-table-column>
-   						<el-table-column sortable="score" prop="score" label="分" width="240"></el-table-column>
+   						<el-table-column sortable="custom" prop="name" label="姓名" width="240"></el-table-column>
+   						<el-table-column sortable="custom" prop="number" label="学号" width="240"></el-table-column>
+   						<el-table-column sortable="custom" prop="score" label="分" width="240"></el-table-column>
    						<el-table-column inline-template label="操作" width="120">
    							<span>
    								<el-button type="primary" size="mini" @click="removeStudent(row)">删除</el-button>
