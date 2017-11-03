@@ -3,6 +3,7 @@
    		<section class="main-content-wrapper wrapper">
    				<div class="row">
    					<!--查询-->
+   					<!--
    					<ul class="btn-edit fl">
    						<li class="input-search">
    							<el-input :placeholder="placeholder" v-model="keywords" style="width:300px;">
@@ -14,6 +15,11 @@
    							<el-button type="danger" class="danger" slot="append" icon="search" @click="query"></el-button>
    						</li>
    					</ul>
+   					-->
+   					
+   					<!--替换为查询的组件-->
+   					<search-student></search-student>
+   					
    					
    					<!--操作-->
    					<ul class="btn-edit fr">
@@ -171,6 +177,11 @@
 	    var uuid = uid.join("");
 	    return uuid;
 	}
+	
+	import Bus from '../../eventBus'
+	import SearchStudent from './SearchStudent.vue';
+	import ElRow from "element-ui/packages/row/src/row";
+	
     export default {
         data: function(){
             return {
@@ -246,8 +257,20 @@
                placeholder:placeholders['name']
             }
         },
+        
+        components: {
+            SearchStudent,ElRow
+        },
         mounted:function(){
         	this.getStudents();
+        	 Bus.$on('filterResultData', (data) => {
+                this.students = data.content;
+       			this.$message.success('loading success');
+       			this.filter.per_page = data.size;
+       			this.total_rows=data.totalElements;
+       			this.filter.page = data.number;
+                this.keywords=data.keywords;
+            });
         },
         methods: {
         	tableSelectionChange(val){
