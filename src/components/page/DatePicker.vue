@@ -18,7 +18,7 @@ export default {
         //month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         week: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
         month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-        format: 'YYYY-MM-DD',
+        format: 'YYYY-MM-DD HH:mm:SSS',
         placeholder: '请选择日期?',
         inputStyle: {
           'display': 'inline-block',
@@ -48,7 +48,7 @@ export default {
         month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
         //week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
         //month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format: 'YYYY-MM-DD HH:mm'
+        format: 'YYYY-MM-DD HH:mm:SSS'
       },
       multiOption: {
         type: 'multi-day',
@@ -56,7 +56,7 @@ export default {
         month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
         //week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
         //month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format:"YYYY-MM-DD HH:mm"
+        format:"YYYY-MM-DD HH:mm:SSS"
       },
       limit: [/*{
         type: 'weekday',

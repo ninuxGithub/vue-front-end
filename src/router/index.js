@@ -48,6 +48,10 @@ export default new Router({
                 {
                     path: '/baseform',
                     component: resolve => require(['../components/page/BaseForm.vue'], resolve)
+                },
+                {
+                	path: '/fileupload',
+                	component: resolve => require(['../components/page/Fileupload.vue'], resolve)
                 }
             ]
         },

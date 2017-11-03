@@ -9,8 +9,7 @@
 		 <div class="handle-box">
 		    <el-form :inline="true" :model="formInline">
 		        <el-form-item label="Sex" class="bg-purple-dark">
-		            <el-select v-model="formInline.sex" clearable placeholder="select sex"
-		                       v-on:visible-change="selectDemo">
+		            <el-select v-model="formInline.sex" clearable placeholder="select sex"  v-on:visible-change="selectDemo">
 		                <el-option
 		                        v-for="item in type_options"
 		                        :label="item.label"
@@ -56,12 +55,11 @@
         methods: {
             selectDemo: function (params) {
                 if (params) {
-                    this.$axios.get("http://127.0.0.1:8000/api/persons/sex")
-                        .then((response) => {
-                            this.type_options = response.data;
-                            console.log(response.data);
-                        }).catch(function (response) {
-                        console.log(response)
+                    this.$axios.get("http://127.0.0.1:8000/api/persons/sex").then((response) => {
+	                    this.type_options = response.data;
+	                    console.log("selectDemo");
+                    }).catch(function (response) {
+                        console.log("selectDemo")
                     });
                 }
 

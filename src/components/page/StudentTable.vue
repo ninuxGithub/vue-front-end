@@ -24,14 +24,27 @@
    					</ul>
    					<!--学生信息表-->
    					<el-table :data="students" stripe v-loading="loading" element-loading-text="拼命地加载中..."
-   						style="width:100%" height="400" 
+   						style="width:100%" height="350"  
    						@sort-change="tableSortChange" 
    						@selection-change ="tableSelectionChange">
-   						<el-table-column type="selection" width="100"></el-table-column>
-   						<el-table-column sortable="custom" prop="name" label="姓名" width="240"></el-table-column>
-   						<el-table-column sortable="custom" prop="number" label="学号" width="240"></el-table-column>
-   						<el-table-column sortable="custom" prop="score" label="分" width="240"></el-table-column>
-   						<el-table-column inline-template label="操作" width="120">
+   						<!--
+   						<el-table-column fixed type="selection" width="50"></el-table-column>
+						-->   						
+   						<el-table-column fixed type="selection" width="50"></el-table-column>
+   						<el-table-column fixed sortable="custom" prop="name" label="姓名" width="120"></el-table-column>
+   						<el-table-column sortable="custom" prop="number" label="学号" width="150"></el-table-column>
+   						<el-table-column sortable="custom" prop="score" label="学分" width="150"></el-table-column>
+   						<el-table-column sortable="custom" prop="createTime" label="创建时间" inline-template width="220">
+   							<!--
+   							<div>{{ row.createTime | moment('YYYY年MM月DD日 HH:mm:ss')}}</div>
+   							-->
+   							<div>{{ row.createTime | moment('YYYY年MM月DD日')}}</div>
+   						</el-table-column>
+   						<el-table-column sortable="custom" prop="hobby" label="爱好" width="150"></el-table-column>
+   						<el-table-column sortable="custom" prop="active" label="激活" inline-template width="150">
+   							<div>{{ row.active==1?'激活':'冻结'}}</div>
+   						</el-table-column>
+   						<el-table-column inline-template label="操作" width="150">
    							<span>
    								<el-button type="primary" size="mini" @click="removeStudent(row)">删除</el-button>
    								<el-button type="primary" size="mini" @click="setCurrent(row)">编辑</el-button>
@@ -41,7 +54,7 @@
    					<!--分页-->
    					<el-pagination class="tc mg" 
    						:current-page="filter.page" 
-   						:page-sizes="[2,10,20,50,100]"
+   						:page-sizes="[6,10,20,50,100]"
    						:page-size="filter.per_page" 
    						:total="total_rows"
    						layout="total,sizes,prev,pager,next,jumper"
@@ -54,7 +67,7 @@
    		
    		<!--创建学生-->
    		<el-dialog title="创建学生" v-model="dialogCreateVisible" :close-on-click-model="false" :close-on-press-escape="false" @close="reset">
-   			<el-form id="#create" :model="create" ref="create" label-width="100px">
+   			<el-form id="#create" :model="create" :rules="rules" ref="create" label-width="100px">
    				<el-form-item label="姓名" prop="name">
    					<el-input v-model="create.name"></el-input>
    				</el-form-item>
@@ -63,6 +76,35 @@
    				</el-form-item>
    				<el-form-item label="学分" prop="score">
    					<el-input v-model="create.score"></el-input>
+   				</el-form-item>
+   				<el-form-item label="创建时间" prop="createTime">
+   					 <el-col :span="11">
+				      <el-date-picker type="date" placeholder="选择日期" v-model="create.createTime" 
+				      	@change="pickTime"  style="width: 100%;">
+				      </el-date-picker>
+				    </el-col>
+   				</el-form-item>
+   				<el-form-item label="爱好" prop="hobby">
+   					<el-col :span="11">
+	   					<el-select v-model="create.hobby" placeholder="请选择爱好">
+						    <el-option v-for="item in options"
+						      :key="item.value"
+						      :label="item.label"
+						      :value="item.value">
+						    </el-option>
+						  </el-select>
+   					</el-col>
+   				</el-form-item>
+   				<el-form-item label="是否激活" prop="active">
+   					<el-radio-group v-model="create.active" @change="changeActive">
+   						<el-radio v-for="item in activeOptions"  :label="item.value" :key="item.value">{{item.label}}</el-radio>
+   					</el-radio-group>
+   					<!--
+   						<el-radio v-for="(item, index) in activeOptions" :label="item.label" :key="index">
+   						</el-radio>
+   					 <el-radio v-model="create.active" label="1">激活</el-radio>
+ 					 <el-radio v-model="create.active" label="0">冻结</el-radio>
+ 					 -->
    				</el-form-item>
    			</el-form>
    			<div slot="footer" class="dialog-footer">
@@ -83,6 +125,29 @@
    				</el-form-item>
    				<el-form-item label="学分" prop="score">
    					<el-input v-model="update.score"></el-input>
+   				</el-form-item>
+   				<el-form-item label="创建时间" prop="createTime">
+   					 <el-col :span="11">
+				      <el-date-picker type="date" placeholder="选择日期" v-model="update.createTime" 
+				      	@change="pickTime"  style="width: 100%;">
+				      </el-date-picker>
+				    </el-col>
+   				</el-form-item>
+   				<el-form-item label="爱好" prop="hobby">
+   					<el-col :span="11">
+	   					<el-select v-model="update.hobby" placeholder="请选择爱好">
+						    <el-option v-for="item in options"
+						      :key="item.value"
+						      :label="item.label"
+						      :value="item.value">
+						    </el-option>
+						  </el-select>
+   					</el-col>
+   				</el-form-item>
+   				<el-form-item label="是否激活" prop="active">
+   					<el-radio-group v-model="update.active" @change="changeActive">
+   						<el-radio v-for="item in activeOptions" :label="item.value" :key="item.value">{{item.label}}</el-radio>
+   					</el-radio-group>
    				</el-form-item>
    			</el-form>
    			<div slot="footer" class="dialog-footer">
@@ -115,17 +180,54 @@
 	               	id:'',
 	               	name:'',
 	               	number:'',
-	               	score:''
+	               	score:'',
+	               	createTime:'',
+	               	hobby:'',
+	               	active:'1'
                },
+               options:[
+	               		{value:'篮球',label:'篮球'},
+	               		{value:'乒乓球',label:'乒乓球'},
+	               		{value:'足球',label:'足球'},
+	               		{value:'排球',label:'排球'}
+	               	],
+	               	
+	           activeOptions:[
+	           		{value:1,label:'激活'},
+	           		{value:0,label:'冻结'}
+	           ],
                currentId:'',
                update:{
                		id:'',
 	               	name:'',
 	               	number:'',
-	               	score:''
+	               	score:'',
+	               	createTime:'',
+	               	hobby:'',
+	               	active:'',
+               },
+               rules:{
+               		name: [
+               			{ required: true, message: '请输入姓名', trigger: 'blur' },
+               			{min: 3, max: 15, message: '长度在 3 到 15 个字符'}
+               		],
+               		number: [
+               			{required: true, message: '请输入学号', trigger: 'blur'},
+               			{min: 0, max: 99999, message: '长度在 0 到 99999 个字符'}
+               		],
+               		score: [
+               			{required: true, message: '请输入学分', trigger: 'blur'},
+               			{validator:(rule,value,callback)=>{
+               				if(/^\d+(\.{0,1}\d+){0,1}$/.test(value) || /^\d+$/.test(value)){
+               					callback();
+               				}else{
+               					callback(new Error("学分只能输入数字"));
+               				}
+            			},trigger:'blur'}
+               		]
                },
                filter:{
-               		per_page:10,
+               		per_page:6,
                		page:1,
                		name:'',
                		number:'',
@@ -178,11 +280,18 @@
         	},
         	setCurrent(vo){
         		this.currentId = vo.id;
-        		this.update.id=vo.id;
-        		this.update.name=vo.name;
-        		this.update.number=vo.number;
-        		this.update.score=vo.score;
+        		this.update = vo;
         		this.dialogUpdateVisible=true;
+        		console.dir(this.update)
+        	},
+        	pickTime(time){
+        		console.dir("pickTime:"+time)
+        		this.create.createTime = time;
+        		this.update.createTime = time;
+        	},
+        	changeActive(active){
+        		this.create.active = active;
+        		this.update.active = active;
         	},
         	reset(){
         		this.$refs.create.resetFields();

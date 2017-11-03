@@ -54,7 +54,7 @@
         mounted () {
             this.getCustomers();
             Bus.$on('filterResultData', (data) => {
-            	console.dir(data)
+            	console.dir("Bus.$on")
                 this.tableData = data.content;
                 this.total = data.totalElements;
                 this.pageSize = data.size;

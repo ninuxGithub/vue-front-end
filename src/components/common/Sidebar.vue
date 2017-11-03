@@ -72,6 +72,10 @@
                             {
                                 index: 'ui-test1',
                                 title: 'test1'
+                            },
+                            {
+                                index: 'fileupload',
+                                title: 'fileupload'
                             }
                         ]
                     },
