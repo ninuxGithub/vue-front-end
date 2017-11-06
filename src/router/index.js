@@ -52,6 +52,14 @@ export default new Router({
                 {
                 	path: '/fileupload',
                 	component: resolve => require(['../components/page/Fileupload.vue'], resolve)
+                },
+                {
+                    path: '/message',
+                    component: resolve => require(['../components/page/Message.vue'], resolve)
+                },
+                {
+                    path: '/dialog',
+                    component: resolve => require(['../components/page/Dialog.vue'], resolve)
                 }
             ]
         },

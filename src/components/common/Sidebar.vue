@@ -76,6 +76,14 @@
                             {
                                 index: 'fileupload',
                                 title: 'fileupload'
+                            },
+                            {
+                                index: 'message',
+                                title: 'message'
+                            },
+                            {
+                                index: 'dialog',
+                                title: 'dialog'
                             }
                         ]
                     },
