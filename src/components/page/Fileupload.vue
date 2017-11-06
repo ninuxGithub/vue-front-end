@@ -38,14 +38,29 @@
 		    <el-table-column prop="zip"  label="邮编" width="120"></el-table-column>
 		</el-table>
 		
-		<div id="box">
-            <com-a></com-a>
-            <com-b></com-b>
-            <com-c></com-c>
-        </div>
+		<br/>
+		<br/>
+		<!--步骤条-->
+		<el-steps :active="3" align-center>
+		  <el-step title="步骤1" description="这是一段很长很长很长的描述性文字"></el-step>
+		  <el-step title="步骤2" description="这是一段很长很长很长的描述性文字"></el-step>
+		  <el-step title="步骤3" description="这是一段很长很长很长的描述性文字"></el-step>
+		  <el-step title="步骤4" description="这是一段很长很长很长的描述性文字"></el-step>
+		</el-steps>
+		
+		<br/>
+		<br/>
+		<!--面包屑-->
+		<el-breadcrumb separator-class="el-icon-arrow-right">
+		  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+		  <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+		  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+		  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+		</el-breadcrumb>
 	</div>
 	
 </template>
+<script type="text/ecmascript-6"></script>
 <script>
   export default {
     data() {
