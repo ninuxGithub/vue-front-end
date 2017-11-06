@@ -12,7 +12,7 @@
             <el-table-column prop="zone" label="zone" width="100"></el-table-column>
             <el-table-column  prop="create_datetime" label="create_datetime"  width="260" :formatter="formatter"></el-table-column>
             <el-table-column fixed="right" label="Operation" width="100">
-                <template scope="scope">
+                <template slot-scope="scope">
                     <el-button @click="editItem(scope.$index, tableData)" 
                     type="button" size="small" icon="edit">Edit</el-button>
                 </template>

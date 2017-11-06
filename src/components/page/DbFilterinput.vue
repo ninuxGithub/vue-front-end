@@ -10,10 +10,7 @@
 		    <el-form :inline="true" :model="formInline">
 		        <el-form-item label="Sex" class="bg-purple-dark">
 		            <el-select v-model="formInline.sex" clearable placeholder="select sex"  v-on:visible-change="selectDemo">
-		                <el-option
-		                        v-for="item in type_options"
-		                        :label="item.label"
-		                        :value="item.value">
+		                <el-option v-for="item in type_options" :label="item.label" :value="item.value" :key="item.value">
 		                </el-option>
 		            </el-select>
 		        </el-form-item>
