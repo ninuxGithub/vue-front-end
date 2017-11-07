@@ -329,7 +329,9 @@
            		this.loading = true;
            		var resource = this.$resource(this.url);
            		resource.query(this.filter).then((response) =>{
+           		    console.dir(response.data)//打印数据情况
            			this.students = response.data.content;
+           			console.table(this.students)//table 可以以表格的方式呈现数据
            			this.$message.success('loading success');
            			this.filter.per_page = response.data.size;
            			this.total_rows=response.data.totalElements;
